@@ -51,7 +51,7 @@ func main() {
 		var msg *nats.Msg
 		var err error
 
-		if len(mc) == 0 {
+		if len(mc) > 0 {
 			if timeout != "" {
 				timeoutINT, _ := strconv.Atoi(timeout)
 				msg, err = conn.Request(topic, data, time.Duration(timeoutINT)*time.Second)
@@ -70,6 +70,6 @@ func main() {
 		}
 		fmt.Fprintf(w, "%s", msg.Data)
 	})
-	log.Printf("Starting server on "+*flagBindTo)
+	log.Printf("Starting server on " + *flagBindTo)
 	log.Fatal(http.ListenAndServe(*flagBindTo, nil))
 }
