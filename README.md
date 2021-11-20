@@ -2,11 +2,6 @@
 
 depends on nats.io
 
-run build.sh
-
-```
-./build.sh
-```
 
 build docker image:
 ```
