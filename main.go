@@ -70,6 +70,6 @@ func main() {
 		}
 		fmt.Fprintf(w, "%s", msg.Data)
 	})
-
+	log.Printf("Starting server on "+*flagBindTo)
 	log.Fatal(http.ListenAndServe(*flagBindTo, nil))
 }

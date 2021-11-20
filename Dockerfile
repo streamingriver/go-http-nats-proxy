@@ -1,6 +1,16 @@
-from scratch
+FROM golang:1.17-alpine
 
-COPY dist/nats_proxy_linux_x86_64 /app
+WORKDIR /app
 
-ENTRYPOINT ["/app"]
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY *.go ./
+
+RUN go build -o /proxy
+
+EXPOSE 80
+
+ENTRYPOINT ["/proxy"]
 
