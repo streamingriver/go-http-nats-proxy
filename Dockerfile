@@ -10,6 +10,11 @@ COPY *.go ./
 
 RUN go build -o /proxy
 
+
+FROM scratch
+WORKDIR /
+COPY --from=0 /proxy /
+
 EXPOSE 80
 
 ENTRYPOINT ["/proxy"]

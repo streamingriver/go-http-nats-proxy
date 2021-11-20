@@ -5,23 +5,17 @@ import (
 	"net/http"
 	"time"
 
-	// "errors"
-	"flag"
 	"io/ioutil"
 	"log"
 	"strconv"
 
 	"github.com/nats-io/nats.go"
-)
-
-var (
-	flagNatsServer = flag.String("nats-server", "nats://nats:4222", "")
-	flagBindTo     = flag.String("bind-to", ":80", "")
+	"gitlab.com/avarf/getenvs"
 )
 
 func main() {
 
-	conn, err := nats.Connect(*flagNatsServer)
+	conn, err := nats.Connect(getenvs.GetEnvString("NATS_SERVER", "nats://nats:4222"))
 	if err != nil {
 		panic(err)
 	}
@@ -70,6 +64,6 @@ func main() {
 		}
 		fmt.Fprintf(w, "%s", msg.Data)
 	})
-	log.Printf("Starting server on " + *flagBindTo)
-	log.Fatal(http.ListenAndServe(*flagBindTo, nil))
+	log.Printf("Starting server on " + getenvs.GetEnvString("NATS_PROXY_PORT", ":80"))
+	log.Fatal(http.ListenAndServe(getenvs.GetEnvString("NATS_PROXY_PORT", ":80"), nil))
 }
