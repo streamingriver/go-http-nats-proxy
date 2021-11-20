@@ -8,6 +8,11 @@ run build.sh
 ./build.sh
 ```
 
+build docker image:
+```
+docker build . -t nats-proxy
+```
+
 
 start nats.io docker:
 
