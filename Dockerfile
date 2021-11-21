@@ -12,5 +12,5 @@ RUN go build -o /proxy
 
 EXPOSE 80
 
-ENTRYPOINT ["/proxy"]
+ENTRYPOINT ["sh", "/proxy"]
 
