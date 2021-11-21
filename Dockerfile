@@ -17,5 +17,5 @@ COPY --from=0 /proxy /
 
 EXPOSE 80
 
-ENTRYPOINT ["/proxy"]
+ENTRYPOINT ["sh", "/proxy"]
 
